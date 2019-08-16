@@ -302,5 +302,30 @@ public class ImplementPSO {
         System.out.println("     Best DZ: "   + gBestDonor.getLoc().getLoc()[2]);
     }
     
+    public int getBestFit(double[] fitnessList){
+        double minValue = fitnessList[0];
+        int index = 0;
+        
+        for(int i=1; i<fitnessList.length; i++){
+            if(fitnessList[i] < minValue){
+                minValue = fitnessList[i];
+                index = i;
+            }
+        }
+        
+        return index;
+    }
     
+    public void printGlobalBest(){
+        System.out.println("\nSolution found at iteration " + (29) + ", the solutions is:");
+	System.out.println("     Best X: "   + gBestLocation.getLoc()[0]);
+	System.out.println("     Best Y: "   + gBestLocation.getLoc()[1]);
+        System.out.println("     Best Z: "   + gBestLocation.getLoc()[2]);
+        System.out.println("     Donor BG: " + gBestDonor.getBgroup());
+        System.out.println("     Best DX: "   + gBestDonor.getLoc().getLoc()[0]);
+	System.out.println("     Best DY: "   + gBestDonor.getLoc().getLoc()[1]);
+        System.out.println("     Best DZ: "   + gBestDonor.getLoc().getLoc()[2]);  
+    }
+    
+
 }
