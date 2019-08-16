@@ -6,6 +6,7 @@
 package pso_final;
 
 import Visualization.PsoParticles;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -327,5 +328,30 @@ public class ImplementPSO {
         System.out.println("     Best DZ: "   + gBestDonor.getLoc().getLoc()[2]);  
     }
     
+    public void updatePositions(){
+         
+         //particleVisualization.getGraphics().setPaintMode();
+         particleVisualization.getGraphics().fill3DRect(0, 0, particleVisualization.getWidth(), particleVisualization.getHeight(),true);
+         acceptor.draw(particleVisualization.getGraphics(),Color.ORANGE,acceptor.getLoc());
+         for(Particle p : swarms ){
+             
+             p.drawParticle(particleVisualization.getGraphics(), Color.GREEN, p.getLocation());
+             
+         }
+         
+         for(Location l : pBestLocation ){
+             
+             acceptor.draw(particleVisualization.getGraphics(), Color.blue, l);             
+         }
+         
+         for(int i =0; i<SWARM_SIZE; i++){
+             if(acceptor.getRequiredBloodGroup().equals(swarms.get(i).getDonorPerson().getBgroup())){
+                 acceptor.draw(particleVisualization.getGraphics(), Color.pink, pBestLocation.get(i));
+                 //acceptor.draw(particleVisualization.getGraphics(), Color.DARK_GRAY, swarms.get(i).getLocation());
+             }
+         }
+         
+         acceptor.drawBest(particleVisualization.getGraphics(), Color.RED, gBestLocation);
+     }
 
 }
