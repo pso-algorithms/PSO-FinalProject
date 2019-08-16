@@ -16,6 +16,7 @@ public class PsoParticles extends javax.swing.JFrame {
      */
     public PsoParticles() {
         initComponents();
+        this.setVisible(true);
     }
 
     /**
