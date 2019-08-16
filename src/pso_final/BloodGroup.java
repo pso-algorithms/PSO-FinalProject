@@ -15,8 +15,8 @@ import java.util.Random;
  * @author aravi
  */
 public enum BloodGroup {
-    
-       APOSITIVE,
+
+    APOSITIVE,
     ANEGETIVE,
     BPOSITIVE,
     BNEGATIVE,
@@ -24,12 +24,12 @@ public enum BloodGroup {
     ONEGATIVE,
     ABPOSITIVE,
     ABNEGATIVE;
-    
-  private static final List<BloodGroup> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
-  private static final int SIZE = VALUES.size();
-  private static final Random RANDOM = new Random();
-  
-  public static BloodGroup randomBloodgroup()  {
-    return VALUES.get(RANDOM.nextInt(SIZE));
-  }
+
+    private static final List<BloodGroup> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
+    private static final int SIZE = VALUES.size();
+    private static final Random RANDOM = new Random();
+
+    public static BloodGroup randomBloodgroup() {
+        return VALUES.get(RANDOM.nextInt(SIZE));
+    }
 }

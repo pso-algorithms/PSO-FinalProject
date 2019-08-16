@@ -13,14 +13,14 @@ import java.awt.Graphics;
  * @author aravi
  */
 public class AcceptorPerson {
-    
+
     private Location loc;
-    
+
     private int personId;
-    
+
     private BloodGroup requiredBloodGroup;
-    
-    public AcceptorPerson(Location lc, BloodGroup bg){
+
+    public AcceptorPerson(Location lc, BloodGroup bg) {
         this.loc = lc;
         this.requiredBloodGroup = bg;
     }
@@ -48,23 +48,23 @@ public class AcceptorPerson {
     public void setRequiredBloodGroup(BloodGroup requiredBloodGroup) {
         this.requiredBloodGroup = requiredBloodGroup;
     }
-    
-     public void draw( Graphics gh, Color c, Location l){
-        
-        int  x_coordinate = (int) (l.getLoc()[0] * 2);
-        int  y_coordinate = (int) (l.getLoc()[1] * 2);
+
+    public void draw(Graphics gh, Color c, Location l) {
+
+        int x_coordinate = (int) (l.getLoc()[0] * 2);
+        int y_coordinate = (int) (l.getLoc()[1] * 2);
         gh.setColor(c);
-        gh.drawOval(x_coordinate, y_coordinate,  20, 20);
-        
+        gh.drawOval(x_coordinate, y_coordinate, 20, 20);
+
     }
-     
-          public void drawBest( Graphics gh, Color c, Location l){
-        
-        int  x_coordinate = (int) (l.getLoc()[0] * 2);
-        int  y_coordinate = (int) (l.getLoc()[1] * 2);
+
+    public void drawBest(Graphics gh, Color c, Location l) {
+
+        int x_coordinate = (int) (l.getLoc()[0] * 2);
+        int y_coordinate = (int) (l.getLoc()[1] * 2);
         gh.setColor(c);
-        gh.drawOval(x_coordinate, y_coordinate,  20, 20);
-        
+        gh.drawOval(x_coordinate, y_coordinate, 20, 20);
+
     }
 
 }
