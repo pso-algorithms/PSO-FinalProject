@@ -15,7 +15,34 @@ public class PSO_Final {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        ImplementPSO imp = new ImplementPSO();
+        imp.initializeSwarm();
+        //imp.execute();
+        Thread[] agents = new Thread[30];
+        for(int i=0; i< 30; i++){
+            agents[i] = new Thread(new PSO_Threads(imp, i));
+            agents[i].start();
+        }
+        
+        try{
+            for(int i=0; i< 30; i++){
+            
+            agents[i].join();
+        }
+        }catch(InterruptedException e){
+            System.out.println("Simulation thread interrupted.");
+        }
+        
+        imp.printGlobalBest();
+//         System.out.println("\nSolution found at iteration " + (29) + ", the solutions is:");
+//	System.out.println("     Best X: "   + imp.getgBestLocation().getLoc()[0]);
+//	System.out.println("     Best Y: "   + imp.getgBestLocation().getLoc()[1]);
+//        System.out.println("     Best Z: "   + imp.getgBestLocation().getLoc()[2]);
+//        System.out.println("     Donor BG: " + gBestDonor.getBgroup());
+//        System.out.println("     Best DX: "   + gBestDonor.getLoc().getLoc()[0]);
+//	System.out.println("     Best DY: "   + gBestDonor.getLoc().getLoc()[1]);
+//        System.out.println("     Best DZ: "   + gBestDonor.getLoc().getLoc()[2]);
     }
     
 }
