@@ -99,7 +99,7 @@ public class ImplementPSO {
 //            System.out.println("Donor Z: " + particle.getLocation().getLoc()[2]);
             swarms.add(particle);
             personId++;
-            createDonor(particle, personId);
+            createDonor(particle, i);
             
         }
         setFinessValues();
@@ -199,6 +199,7 @@ public class ImplementPSO {
                 
                 Location newLocation  = new Location(newLoc);
                 particle.setLocation(newLocation);
+                printParticleThread(i, particle, t);
                 updatePositions();
             }
             
@@ -212,6 +213,18 @@ public class ImplementPSO {
             setFinessValues();
              
             
+    }
+    
+        public void printParticleThread(int i, Particle p, int t){
+            System.out.println("ITERATION " + t + ": ");
+            System.out.println("PARTICLE " + i);
+            System.out.println("     Particle X: " + p.getLocation().getLoc()[0]);
+            System.out.println("     Particle Y: " + p.getLocation().getLoc()[1]);
+            System.out.println("     Particle Z: " + p.getLocation().getLoc()[2]);
+            
+            System.out.println("     Particle BestX: " + pBestLocation.get(i).getLoc()[0]);
+            System.out.println("     Particle BestY: " + pBestLocation.get(i).getLoc()[1]);
+            System.out.println("     Particle BestZ: " + pBestLocation.get(i).getLoc()[2]);
     }
 
 
@@ -318,10 +331,11 @@ public class ImplementPSO {
     }
     
     public void printGlobalBest(){
-        System.out.println("\nSolution found at iteration " + (29) + ", the solutions is:");
-	System.out.println("     Best X: "   + gBestLocation.getLoc()[0]);
-	System.out.println("     Best Y: "   + gBestLocation.getLoc()[1]);
-        System.out.println("     Best Z: "   + gBestLocation.getLoc()[2]);
+        System.out.println("\nFinal solution is:");
+//	System.out.println("     Best X: "   + gBestLocation.getLoc()[0]);
+//	System.out.println("     Best Y: "   + gBestLocation.getLoc()[1]);
+//        System.out.println("     Best Z: "   + gBestLocation.getLoc()[2]);
+        System.out.println("     Donor : " + gBestDonor.getPersonId());
         System.out.println("     Donor BG: " + gBestDonor.getBgroup());
         System.out.println("     Best DX: "   + gBestDonor.getLoc().getLoc()[0]);
 	System.out.println("     Best DY: "   + gBestDonor.getLoc().getLoc()[1]);
