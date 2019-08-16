@@ -19,13 +19,22 @@ public class FitnessCalculation {
         this.tarPerson = ap;
     }
     
-    public static double getFinessValue(Location l, DonorPerson dp){
-        double xDistance = Math.pow((tarPerson.getLoc().getLoc()[0]-l.getLoc()[0]),2);
-        double yDistance = Math.pow((tarPerson.getLoc().getLoc()[1]-l.getLoc()[1]),2);
-        double zdistance = Math.pow((tarPerson.getLoc().getLoc()[2]-l.getLoc()[2]),2);
+    public static double getFinessValue(AcceptorPerson ap, DonorPerson dp){
+        double xDistance = Math.pow((ap.getLoc().getLoc()[0]-dp.getLoc().getLoc()[0]),2);
+        double yDistance = Math.pow((ap.getLoc().getLoc()[1]-dp.getLoc().getLoc()[1]),2);
+        double zdistance = Math.pow((ap.getLoc().getLoc()[2]-dp.getLoc().getLoc()[2]),2);
         
-        double fitnessvalue = Math.sqrt(xDistance+yDistance+zdistance);
-        return fitnessvalue;
+        double dis = Math.sqrt(xDistance+yDistance+zdistance);
+        
+        double fitValue;
+        if(ap.getRequiredBloodGroup().equals(dp.getBgroup())){
+            fitValue = 1; 
+        }else{
+            fitValue = 10;
+        }
+        
+        double fitnessValue = (dis + fitValue);
+        return fitnessValue;
     }
     
 }
