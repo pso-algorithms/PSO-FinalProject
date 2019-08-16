@@ -69,4 +69,50 @@ public class ImplementPSO {
         System.out.println("Required BG: " + acceptor.getRequiredBloodGroup());
     }
     
+    public void initializeSwarm(){
+        
+        Particle particle;
+        double[] loc;
+        double[] vel;
+        for(int i=0; i<SWARM_SIZE; i++){
+            loc = new double[3];
+            vel = new double[3];
+            particle = new Particle();
+            
+            loc[0]= ThreadLocalRandom.current().nextInt(50,maxDirection);
+            loc[1]= ThreadLocalRandom.current().nextInt(50,maxDirection);
+            loc[2]= ThreadLocalRandom.current().nextInt(50,maxDirection);
+            
+            Location particlePosition = new Location(loc);
+            
+            vel[0] = ThreadLocalRandom.current().nextInt(1,5);
+            vel[1] = ThreadLocalRandom.current().nextInt(1,5);
+            vel[2] = ThreadLocalRandom.current().nextInt(1,5);
+            
+            Velocity velocity = new Velocity(vel);
+            particle.setLocation(particlePosition);
+            particle.setVelocity(velocity); 
+//            System.out.println("\n Particle: "+ i);
+//            System.out.println("Donor X: " + particle.getLocation().getLoc()[0]);
+//            System.out.println("Donor Y: " + particle.getLocation().getLoc()[1]);
+//            System.out.println("Donor Z: " + particle.getLocation().getLoc()[2]);
+            swarms.add(particle);
+            personId++;
+            createDonor(particle, personId);
+            
+        }
+        setFinessValues();
+         for (int i = 0; i < SWARM_SIZE; i++) {
+            pBest[i] = fitnessValueList[i];
+            pBestLocation.add(swarms.get(i).getLocation());
+        }
+        int bestParticleIndex = getBestFit(fitnessValueList);
+        gBest = fitnessValueList[0];
+        gBestLocation = swarms.get(0).getLocation();
+        gBestDonor = swarms.get(0).getDonorPerson();
+        
+        printParticles();
+    }
+    
+    
 }
