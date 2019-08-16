@@ -142,4 +142,74 @@ public class ImplementPSO {
                     
                 }
     }
+    
+    
+    public void execute1(int t){
+        
+        for(int j=0; j<SWARM_SIZE; j++){
+                if(fitnessValueList[j]<pBest[j]){
+                    pBest[j] = fitnessValueList[j];
+                    pBestLocation.set(j, swarms.get(j).getLocation());
+                }
+            }
+            
+            int bestParticleIndex = getBestFit(fitnessValueList);
+            
+            if(fitnessValueList[bestParticleIndex] < gBest){
+                System.out.println("In Gbest");
+                gBest = fitnessValueList[bestParticleIndex];
+                gBestLocation = swarms.get(bestParticleIndex).getLocation();
+                gBestDonor = swarms.get(bestParticleIndex).getDonorPerson();
+                
+            }
+            System.out.println("Thread t: " + t);
+            double w = W_UPPERBOUND - ((int) (t) / MAX_ITERATION) * (W_UPPERBOUND - W_LOWERBOUND);
+            double r1 = ThreadLocalRandom.current().nextInt(0, 1);
+            double r2 = ThreadLocalRandom.current().nextInt(0, 1);
+            
+            for(int i=0; i<SWARM_SIZE; i++){
+                Particle particle = swarms.get(i);
+                
+                double[] newVelocity = new double[3];
+                
+                newVelocity[0] = ((w * particle.getVelocity().getVelocity()[0]) + (r1 * c1) *(pBestLocation.get(i).getLoc()[0] - particle.getLocation().getLoc()[0]) 
+                                    + (r2 * c2) * (gBestLocation.getLoc()[0] - particle.getLocation().getLoc()[0]));
+                if(newVelocity[0] > maxDirection){
+                    newVelocity[0] = maxDirection;
+                }
+                newVelocity[1] = ((w * particle.getVelocity().getVelocity()[1]) + (r1 * c1) *(pBestLocation.get(i).getLoc()[1] - particle.getLocation().getLoc()[1]) 
+                                    + (r2 * c2) * (gBestLocation.getLoc()[1] - particle.getLocation().getLoc()[1]));
+                if(newVelocity[1] > maxDirection){
+                    newVelocity[1] = maxDirection;
+                }
+                newVelocity[2] = ((w * particle.getVelocity().getVelocity()[2]) + (r1 * c1) *(pBestLocation.get(i).getLoc()[2] - particle.getLocation().getLoc()[2]) 
+                                    + (r2 * c2) * (gBestLocation.getLoc()[2] - particle.getLocation().getLoc()[2]));
+                if(newVelocity[2] > maxDirection){
+                    newVelocity[2] = maxDirection;
+                }
+                Velocity v = new Velocity(newVelocity);
+                particle.setVelocity(v);
+                
+                double[] newLoc = new double[3];
+                
+                newLoc[0] = particle.getLocation().getLoc()[0]+newVelocity[0];
+                newLoc[1] = particle.getLocation().getLoc()[1]+newVelocity[1];
+                newLoc[2] = particle.getLocation().getLoc()[2]+newVelocity[2];
+                
+                Location newLocation  = new Location(newLoc);
+                particle.setLocation(newLocation);
+                updatePositions();
+            }
+            
+//            System.out.println("ITERATION " + t + ": ");
+//            System.out.println("     Best X: " + gBestLocation.getLoc()[0]);
+//            System.out.println("     Best Y: " + gBestLocation.getLoc()[1]);
+//            System.out.println("     Best Z: " + gBestLocation.getLoc()[2]);
+            
+            
+            t++;
+            setFinessValues();
+             
+            
+    }
 }
