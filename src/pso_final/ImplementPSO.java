@@ -6,7 +6,10 @@
 package pso_final;
 
 import Visualization.PsoParticles;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  *
@@ -43,5 +46,27 @@ public class ImplementPSO {
     DonorPerson gBestDonor;
     PsoParticles particleVisualization;
     //static int t=0;
+    public ImplementPSO(){
+        particleVisualization = new PsoParticles();
+        particleVisualization.pack();
+        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    int height = screenSize.height;
+    int width = screenSize.width;
+    particleVisualization.setSize(width/2, height/2);
 
+    // center the jframe on screen
+    particleVisualization.setLocationRelativeTo(null);
+        location = new double[3];
+        location[0] = ThreadLocalRandom.current().nextInt(10,50);
+        location[1] = ThreadLocalRandom.current().nextInt(10,50);
+        location[2] = ThreadLocalRandom.current().nextInt(10,50);
+        Location sloc = new Location(location);
+        acceptor = new AcceptorPerson(sloc, BloodGroup.randomBloodgroup());
+        System.out.println("Acceptor X: " + acceptor.getLoc().getLoc()[0]);
+        System.out.println("Acceptor Y: " + acceptor.getLoc().getLoc()[1]);
+        System.out.println("Acceptor Z: " + acceptor.getLoc().getLoc()[2]);
+        System.out.println("Required BG: " + acceptor.getRequiredBloodGroup());
+    }
+    
 }
