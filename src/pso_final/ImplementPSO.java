@@ -114,5 +114,32 @@ public class ImplementPSO {
         printParticles();
     }
     
+    public void printParticles(){
+        for(int i=0; i<SWARM_SIZE; i++){
+            System.out.println("\n Particle: "+ i);
+            System.out.println("Donor X: " + swarms.get(i).getLocation().getLoc()[0]);
+            System.out.println("Donor Y: " + swarms.get(i).getLocation().getLoc()[1]);
+            System.out.println("Donor Z: " + swarms.get(i).getLocation().getLoc()[2]);
+            System.out.println("Donor BG: " + swarms.get(i).getDonorPerson().getBgroup());
+        }
+    }
     
+    public void createDonor(Particle p,int personId){
+        double[] loc = new double[3];
+        loc[0]= ThreadLocalRandom.current().nextInt(1,maxDirection);
+        loc[1]= ThreadLocalRandom.current().nextInt(1,maxDirection);
+        loc[2]= ThreadLocalRandom.current().nextInt(1,maxDirection);
+        Location l = new Location(loc);
+        
+        DonorPerson dp = new DonorPerson(p.getLocation(), BloodGroup.randomBloodgroup(), personId);
+        p.setDonorPerson(dp);
+    }
+    
+    
+    public void setFinessValues(){
+        for(int i=0; i<SWARM_SIZE; i++) {
+                    fitnessValueList[i] = swarms.get(i).getFitnessValue(acceptor, swarms.get(i).getDonorPerson());
+                    
+                }
+    }
 }
