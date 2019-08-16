@@ -11,22 +11,24 @@ package pso_final;
  */
 public class PSO_Final {
 
+    static int NO_OF_AGENTS = 30;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
-        ImplementPSO imp = new ImplementPSO();
+        
+        ImplementPSO imp = new ImplementPSO(NO_OF_AGENTS);
         imp.initializeSwarm();
         //imp.execute();
-        Thread[] agents = new Thread[30];
-        for(int i=0; i< 30; i++){
+        Thread[] agents = new Thread[NO_OF_AGENTS];
+        for(int i=0; i< NO_OF_AGENTS; i++){
             agents[i] = new Thread(new PSO_Threads(imp, i));
             agents[i].start();
         }
         
         try{
-            for(int i=0; i< 30; i++){
+            for(int i=0; i< NO_OF_AGENTS; i++){
             
             agents[i].join();
         }
