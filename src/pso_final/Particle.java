@@ -76,7 +76,7 @@ public class Particle {
         if(ap.getRequiredBloodGroup().equals(dp.getBgroup())){
             fitValue = 1; 
         }else{
-            fitValue = 10;
+            fitValue = 20;
         }
         
         fitnessValue = (dis + fitValue);
